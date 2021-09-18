@@ -14,8 +14,6 @@ namespace TimeSheets.Entities
         [ForeignKey("FK_Customer")]
         public int CustomerId { get; set; }
 
-        public List<Contract> Contracts { get; set; }
-
         [Required]
         [DisplayName("Hours spent")]
         public TimeSpan TotalHours { get; set; }
@@ -26,5 +24,9 @@ namespace TimeSheets.Entities
 
         [MaxLength(300)]
         public string Comment { get; set; }
+        
+        public bool IsClosed { get; set; } = false;
+        
+        public List<Contract> Contracts { get; set; }
     }
 }

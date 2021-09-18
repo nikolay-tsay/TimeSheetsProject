@@ -28,9 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
-      <Folder Include="DAL\Repositories" />
-      <Folder Include="DAL\Services" />
+      <Folder Include="DAL\Services\Interfaces" />
     </ItemGroup>
 
 </Project>

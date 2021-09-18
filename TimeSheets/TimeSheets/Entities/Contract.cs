@@ -18,14 +18,14 @@ namespace TimeSheets.Entities
         
         [Required]
         public string Description { get; set; }
-        
-        public bool IsFinished { get; set; } = false;
-        
+
         [Required]
         [DisplayName("Created")]
         public DateTimeOffset DateOfCreation { get; set; }
 
         [DisplayName("Finished")]
         public DateTimeOffset DateOfFinish { get; set; }
+        
+        public bool IsFinished { get; set; } = false;
     }
 }

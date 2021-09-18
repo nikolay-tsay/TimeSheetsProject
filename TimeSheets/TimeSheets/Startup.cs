@@ -8,7 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TimeSheets.DAL;
+using TimeSheets.DAL.Repositories;
+using TimeSheets.DAL.Repositories.Interfaces;
 using TimeSheets.DTO;
+using TimeSheets.Entities;
 
 namespace TimeSheets
 {
@@ -24,6 +27,11 @@ namespace TimeSheets
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IContractRepository, ContractRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            
             services.AddControllers();
             
             services.AddDbContext<ApplicationDbContext>(
