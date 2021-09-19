@@ -15,29 +15,28 @@ namespace TimeSheets.DAL.Repositories
             _db = db;
         }
         
-        public async Task<IList<Invoice>> GetAll()
+        public async Task<IList<Invoice>> GetAllAsync()
         {
             return await _db.Invoices.ToListAsync();
         }
 
-        public async Task<Invoice> GetOne(int id)
+        public async Task<Invoice> GetOneAsync(int id)
         {
             return await _db.Invoices.FindAsync(id);
         }
 
-        public async Task Create(Invoice obj)
+        public async Task CreateAsync(Invoice obj)
         {
             _db.Invoices.Add(obj);
             await _db.SaveChangesAsync();
         }
 
-        public async Task CloseInvoice(int id)
-        {
-            var invoice = new Invoice() {Id = id};
-            _db.Invoices.Attach(invoice);
-            _db.Entry(invoice).Property(x => x.IsClosed).IsModified = true;
-
-            await _db.SaveChangesAsync();
-        }
+        //public async Task CloseInvoice(int id)
+        //{
+        //    var invoice = await _db.Invoices.FindAsync(id);
+        //    invoice.IsClosed = true;
+        //    _db.Entry(invoice).State = EntityState.Modified;
+        //    await _db.SaveChangesAsync();
+        //}
     }
 }

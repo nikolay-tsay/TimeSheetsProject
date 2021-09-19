@@ -1,4 +1,3 @@
-using System.Data.SqlClient;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,8 +9,9 @@ using Microsoft.OpenApi.Models;
 using TimeSheets.DAL;
 using TimeSheets.DAL.Repositories;
 using TimeSheets.DAL.Repositories.Interfaces;
+using TimeSheets.DAL.Services;
+using TimeSheets.DAL.Services.Interfaces;
 using TimeSheets.DTO;
-using TimeSheets.Entities;
 
 namespace TimeSheets
 {
@@ -31,6 +31,11 @@ namespace TimeSheets
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IContractService, ContractService>();
             
             services.AddControllers();
             

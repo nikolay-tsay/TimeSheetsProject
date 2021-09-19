@@ -5,6 +5,6 @@ namespace TimeSheets.DAL.Repositories.Interfaces
 {
     public interface IContractRepository : IBaseRepository<Contract>
     {
-        Task FinishContract(int id);
+        Task FinishContractAsync(int id);
     }
 }

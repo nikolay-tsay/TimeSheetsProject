@@ -10,6 +10,10 @@ namespace TimeSheets.Entities
         [Key]
         public int Id { get; set; }
 
+        [Required]
+        [MaxLength(50)]
+        public string ContractName { get; set; }
+
         [ForeignKey("FK_Employee")]
         public int EmployeeId { get; set; }
 
@@ -18,6 +22,9 @@ namespace TimeSheets.Entities
         
         [Required]
         public string Description { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
 
         [Required]
         [DisplayName("Created")]

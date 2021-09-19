@@ -44,9 +44,10 @@ namespace TimeSheets.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
-                    TotalHours = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    TotalHours = table.Column<int>(type: "integer", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "numeric", nullable: false),
-                    Comment = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true)
+                    Comment = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true),
+                    IsClosed = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,12 +66,14 @@ namespace TimeSheets.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ContractName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     EmployeeId = table.Column<int>(type: "integer", nullable: false),
                     CustomerId = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    IsFinished = table.Column<bool>(type: "boolean", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
                     DateOfCreation = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     DateOfFinish = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    IsFinished = table.Column<bool>(type: "boolean", nullable: false),
                     InvoiceId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>

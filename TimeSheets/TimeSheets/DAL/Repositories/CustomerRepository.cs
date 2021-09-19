@@ -15,17 +15,17 @@ namespace TimeSheets.DAL.Repositories
             _db = db;
         }
         
-        public async Task<IList<Customer>> GetAll()
+        public async Task<IList<Customer>> GetAllAsync()
         {
             return await _db.Customers.ToListAsync();
         }
 
-        public async Task<Customer> GetOne(int id)
+        public async Task<Customer> GetOneAsync(int id)
         {
             return await _db.Customers.FindAsync(id);
         }
 
-        public async Task Create(Customer obj)
+        public async Task CreateAsync(Customer obj)
         {
             _db.Customers.Add(obj);
             await _db.SaveChangesAsync();

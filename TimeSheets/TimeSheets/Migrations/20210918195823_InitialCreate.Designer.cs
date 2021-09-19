@@ -10,7 +10,7 @@ using TimeSheets.DAL;
 namespace TimeSheets.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210918165404_InitialCreate")]
+    [Migration("20210918195823_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,11 @@ namespace TimeSheets.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("ContractName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer");
@@ -49,6 +54,9 @@ namespace TimeSheets.Migrations
 
                     b.Property<bool>("IsFinished")
                         .HasColumnType("boolean");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
@@ -122,8 +130,11 @@ namespace TimeSheets.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer");
 
-                    b.Property<TimeSpan>("TotalHours")
-                        .HasColumnType("interval");
+                    b.Property<bool>("IsClosed")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("TotalHours")
+                        .HasColumnType("integer");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric");

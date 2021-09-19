@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +15,7 @@ namespace TimeSheets.Entities
 
         [Required]
         [DisplayName("Hours spent")]
-        public TimeSpan TotalHours { get; set; }
+        public int TotalHours { get; set; }
 
         [Required]
         [DisplayName("Total price")]

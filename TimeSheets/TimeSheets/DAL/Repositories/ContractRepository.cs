@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -15,27 +16,28 @@ namespace TimeSheets.DAL.Repositories
             _db = db;
         }
         
-        public async Task<IList<Contract>> GetAll()
+        public async Task<IList<Contract>> GetAllAsync()
         {
             return await _db.Contracts.ToListAsync();
         }
 
-        public async Task<Contract> GetOne(int id)
+        public async Task<Contract> GetOneAsync(int id)
         {
             return await _db.Contracts.FindAsync(id);
         }
 
-        public async Task Create(Contract obj)
+        public async Task CreateAsync(Contract obj)
         {
             _db.Contracts.Add(obj);
             await _db.SaveChangesAsync();
         }
 
-        public async Task FinishContract(int id)
+        public async Task FinishContractAsync(int id)
         {
-            var contract = new Contract() {Id = id};
-            _db.Contracts.Attach(contract);
-            _db.Entry(contract).Property(x => x.IsFinished).IsModified = true;
+            var contract = await _db.Contracts.FindAsync(id);
+            contract.IsFinished = true;
+            contract.DateOfFinish = DateTimeOffset.Now;
+            _db.Entry(contract).State = EntityState.Modified;
             
             await _db.SaveChangesAsync();
         }

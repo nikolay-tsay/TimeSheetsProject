@@ -5,10 +5,10 @@ namespace TimeSheets.DAL.Repositories.Interfaces
 {
     public interface IBaseRepository<T> where T : class
     {
-        Task<IList<T>> GetAll();
+        Task<IList<T>> GetAllAsync();
 
-        Task<T> GetOne(int id);
+        Task<T> GetOneAsync(int id);
 
-        Task Create(T obj);
+        Task CreateAsync(T obj);
     }
 }

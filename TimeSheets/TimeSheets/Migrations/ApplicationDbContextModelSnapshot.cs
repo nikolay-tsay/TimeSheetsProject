@@ -26,6 +26,11 @@ namespace TimeSheets.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("ContractName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer");
 
@@ -47,6 +52,9 @@ namespace TimeSheets.Migrations
 
                     b.Property<bool>("IsFinished")
                         .HasColumnType("boolean");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
@@ -123,8 +131,8 @@ namespace TimeSheets.Migrations
                     b.Property<bool>("IsClosed")
                         .HasColumnType("boolean");
 
-                    b.Property<TimeSpan>("TotalHours")
-                        .HasColumnType("interval");
+                    b.Property<int>("TotalHours")
+                        .HasColumnType("integer");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric");
