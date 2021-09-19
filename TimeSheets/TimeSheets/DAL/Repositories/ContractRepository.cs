@@ -16,15 +16,9 @@ namespace TimeSheets.DAL.Repositories
             _db = db;
         }
         
-        public async Task<IList<Contract>> GetAllAsync()
-        {
-            return await _db.Contracts.ToListAsync();
-        }
+        public async Task<IList<Contract>> GetAllAsync() => await _db.Contracts.ToListAsync();
 
-        public async Task<Contract> GetOneAsync(int id)
-        {
-            return await _db.Contracts.FindAsync(id);
-        }
+        public async Task<Contract> GetOneAsync(int id) => await _db.Contracts.FindAsync(id);
 
         public async Task CreateAsync(Contract obj)
         {
@@ -37,9 +31,19 @@ namespace TimeSheets.DAL.Repositories
             var contract = await _db.Contracts.FindAsync(id);
             contract.IsFinished = true;
             contract.DateOfFinish = DateTimeOffset.Now;
+            
+            var employee = await _db.Employees.FindAsync(contract.EmployeeId);
+            contract.HoursSpent = CountHours(contract.DateOfCreation, contract.DateOfFinish);
+            
+            contract.Price = CountPrice(contract.HoursSpent, employee.Rate);
+            
             _db.Entry(contract).State = EntityState.Modified;
             
             await _db.SaveChangesAsync();
         }
+        
+        private int CountHours(DateTimeOffset firstDate, DateTimeOffset secondDate) => (secondDate - firstDate).Hours;
+
+        private decimal CountPrice(int hours, decimal rate) => rate * hours;
     }
 }

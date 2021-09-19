@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -42,23 +43,9 @@ namespace TimeSheets.DAL.Services
 
         public async Task CreateAsync(Invoice obj )=> 
             await _repository.CreateAsync(obj);
-        
 
-        public async Task CloseInvoiceAsync(int id)
-        {
-            var invoice = await _db.Invoices.FindAsync(id);
-            
-            foreach (var contract in invoice.Contracts)
-            {
-                if (!contract.IsFinished) continue;
-                
-                invoice.TotalHours += (contract.DateOfFinish - contract.DateOfCreation).Hours;
-                invoice.TotalPrice += contract.Price;
-            }
 
-            _db.Entry(invoice).State = EntityState.Modified;
-
-            await _db.SaveChangesAsync();
-        }
+        public async Task CloseInvoiceAsync(int id) =>
+            await _repository.CloseInvoiceAsync(id);
     }
 }

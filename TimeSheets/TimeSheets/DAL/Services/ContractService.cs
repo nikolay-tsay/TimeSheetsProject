@@ -32,7 +32,8 @@ namespace TimeSheets.DAL.Services
             return output;
         }
 
-        public async Task<ContractDto> GetOneAsync(int id) => _mapper.Map<ContractDto>(await _repository.GetOneAsync(id));
+        public async Task<ContractDto> GetOneAsync(int id) =>
+            _mapper.Map<ContractDto>(await _repository.GetOneAsync(id));
 
         public async Task CreateAsync(Contract obj) => await _repository.CreateAsync(obj);
 

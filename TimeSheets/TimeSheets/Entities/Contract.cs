@@ -33,6 +33,8 @@ namespace TimeSheets.Entities
         [DisplayName("Finished")]
         public DateTimeOffset DateOfFinish { get; set; }
         
+        public int HoursSpent { get; set; }
+        
         public bool IsFinished { get; set; } = false;
     }
 }
